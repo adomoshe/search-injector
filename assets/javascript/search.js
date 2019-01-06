@@ -29,10 +29,6 @@ const adoForm = document.createElement('form');
 const adoSpanResultsTitle = document.createElement('span');
 adoSpanResultsTitle.innerHTML = '<br>Results:';
 
-const adoSearchArrNode = document.createElement('span')
-adoSearchArrNode.id = 'ado-button'
-adoSearchArrNode.innerHTML = adoSearchArr;
-
 const adoSpanResults = document.createElement('span');
 adoSpanResults.id = 'ado-span-results';
 
@@ -46,8 +42,6 @@ adoInput.type = 'text';
 adoInput.placeholder = 'Search Here';
 adoInput.style.borderRadius = '10px';
 
-adoSpanResults.appendChild(adoSearchArrNode);
-
 adoForm.appendChild(adoInput);
 
 adoModal.appendChild(adoSpanTitle);
@@ -60,14 +54,20 @@ document.body.appendChild(adoModal);
 
 const adoSearchRes = [];
 
-const adoButton = () => {
-    const adoButtonRemoval = document.getElementById("ado-span-results");
-while (adoButtonRemoval.firstChild) {
-    adoButtonRemoval.removeChild(adoButtonRemoval.firstChild);
+function adoChosen() {
+    document.body.removeChild(document.getElementById('ado-modal'));
+    adoSearch.selectedIndex = 3
 }
+
+const adoButton = () => {
+  const adoButtonRemoval = document.getElementById('ado-span-results');
+  while (adoButtonRemoval.firstChild) {
+    adoButtonRemoval.removeChild(adoButtonRemoval.firstChild);
+  }
   adoSearchRes.forEach((resVal, i) => {
     let adoNewButton = document.createElement('button');
-    // adoNewButton.id = `ado-button`
+    adoNewButton.id = `ado-button${i}`;
+    adoNewButton.onclick = adoChosen;
     adoNewButton.innerHTML = resVal;
     adoSpanResults.appendChild(adoNewButton);
   });
@@ -96,4 +96,4 @@ const search = () => {
 const adoSearchId = document.getElementById('ado-search');
 adoSearchId.addEventListener('keyup', search);
 
-// document.body.removeChild(document.getElementById('ado-modal'))
+
