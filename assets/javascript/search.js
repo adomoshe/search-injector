@@ -56,7 +56,14 @@ const adoSearchRes = [];
 
 function adoChosen() {
     document.body.removeChild(document.getElementById('ado-modal'));
-    adoSearch.selectedIndex = 3
+    let selectIn;
+    for (let i = 0; i < adoSearch.length; i++) {
+        if (adoSearch.options[i].innerHTML.trim().indexOf(this.innerHTML.trim()) !== -1) {
+          selectIn = i;
+          break;
+        }
+    }
+    adoSearch.selectedIndex = selectIn;
 }
 
 const adoButton = () => {
